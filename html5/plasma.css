@@ -1,0 +1,10 @@
+body {
+	color: white;
+	background: url(moire1.png), url(moire2.png), url(checkerboard.png);
+	animation: sliding 12s linear infinite;
+}
+
+@keyframes sliding {
+	from { background-position: 512px 512px, 0 512px; }
+	to   { background-position: 0 0, 512px 0; }
+}

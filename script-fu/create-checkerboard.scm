@@ -1,0 +1,15 @@
+(define (create-checkerboard name)
+	(let*
+		(
+			(image (car (gimp-image-new 2 2 RGB)))
+			(main (car (gimp-layer-new image 2 2 RGB-IMAGE "Main" 0 NORMAL-MODE)))
+		)
+		(gimp-image-insert-layer image main 0 0)
+		(gimp-drawable-set-pixel main 0 0 3 #(255 0 0))
+		(gimp-drawable-set-pixel main 1 1 3 #(255 0 0))
+		(gimp-drawable-set-pixel main 0 1 3 #(0 255 0))
+		(gimp-drawable-set-pixel main 1 0 3 #(0 255 0))
+		(file-png-save RUN-NONINTERACTIVE image main name name 0 9 0 0 0 1 1)
+		(gimp-image-delete image)
+	)
+)
