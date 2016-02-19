@@ -1,7 +1,7 @@
 body {
 	color: white;
-	background: url(moire1.png), url(moire2.png), url(checkerboard.png);
-	animation: sliding 12s linear infinite;
+	background: url(moire1.png), url(moire2.png);
+	animation: sliding 20s linear infinite;
 }
 
 @keyframes sliding {
