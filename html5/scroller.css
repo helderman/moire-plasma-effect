@@ -1,0 +1,29 @@
+.scroller {
+	overflow: hidden;
+	color: white;
+	margin: 0;
+	text-align: center;
+	font-family: 'Orbitron', sans-serif;
+	text-shadow: 4px 4px 12px black;
+}
+
+.scroller > div {
+	position: absolute;
+	top: 50%;
+	margin-left: 120%;
+	white-space: nowrap;
+	font-size: 60px;
+	font-weight: bold;
+	color: red;
+	animation: scrolling 120s linear infinite, colors 8s linear infinite;
+}
+
+@keyframes scrolling {
+	from { left: 0; }
+	to   { left: -36000px; }
+}
+
+@keyframes colors {
+	from { filter: hue-rotate(0deg); -webkit-filter: hue-rotate(0deg); }
+	to { filter: hue-rotate(360deg); -webkit-filter: hue-rotate(360deg); }
+}

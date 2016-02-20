@@ -1,5 +1,4 @@
-body {
-	color: white;
+.plasma {
 	background: url(moire1.png), url(moire2.png);
 	animation: sliding 20s linear infinite;
 }
