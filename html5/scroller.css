@@ -7,6 +7,14 @@
 	text-shadow: 4px 4px 12px black;
 }
 
+.scroller a:link {
+	color: yellow;
+}
+
+.scroller a:visited {
+	color: yellow;
+}
+
 .scroller > div {
 	position: absolute;
 	top: 50%;
@@ -14,7 +22,7 @@
 	white-space: nowrap;
 	font-size: 60px;
 	font-weight: bold;
-	color: red;
+	color: yellow;
 	animation: scrolling 120s linear infinite, colors 8s linear infinite;
 }
 
