@@ -1,6 +1,6 @@
 .plasma {
 	background: url(moire1.png), url(moire2.png);
-	animation: sliding 20s linear infinite;
+	animation: sliding 8s steps(512) infinite;
 }
 
 @keyframes sliding {
