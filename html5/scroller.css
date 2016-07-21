@@ -28,7 +28,7 @@
 
 @keyframes scrolling {
 	from { left: 0; }
-	to   { left: -36000px; }
+	to   { left: -65000px; }
 }
 
 @keyframes colors {

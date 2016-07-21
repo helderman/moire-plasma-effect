@@ -1,0 +1,23 @@
+This project uses moiré patterns to mimic a plasma effect. This technique has its pros and cons.
+
+Advantages:
+- Smooth animation; under Scratch, the use of sprites and transparency outperforms traditional brute-force pixel manipulations.
+- Simple code; the complexity is in the images.
+
+Disadvantages:
+- Visible 'fabric' (thin black horizontal lines).
+- Low contrast.
+- Very sensitive to scaling; any non-integer scaling factor may ruin the effect.
+
+Further reading:
+https://en.wikipedia.org/wiki/Moir%C3%A9_pattern
+https://en.wikipedia.org/wiki/Plasma_effect
+
+The moiré patterns were created using GIMP (http://www.gimp.org). Solid noise was applied as a displacement map to a pattern of black and white horizontal lines; the resulting pattern was used as the alpha channel in an otherwise black image.
+
+Sound: 'Lava loop' by Audionautics.
+https://www.freesound.org/people/Audionautics/sounds/133901/
+
+BUGS:
+Looks terrible when run in full-screen mode; apparently the graphical scaling emphasizes the 'fabric' lines.
+Looks terrible when run with the Stage3D engine (i.e. in a project that uses certain graphics effects - see http://wiki.scratch.mit.edu/wiki/Stage3D); it appears the bottom part of a sprite gets blurred, possibly due to misaligned scan lines.
