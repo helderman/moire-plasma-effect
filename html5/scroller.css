@@ -23,12 +23,12 @@
 	font-size: 60px;
 	font-weight: bold;
 	color: yellow;
-	animation: scrolling 120s linear infinite, colors 8s linear infinite;
+	animation: scrolling 180s linear infinite, colors 8s linear infinite;
 }
 
 @keyframes scrolling {
 	from { left: 0; }
-	to   { left: -65000px; }
+	to   { left: -60000px; }
 }
 
 @keyframes colors {
