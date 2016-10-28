@@ -1,0 +1,13 @@
+.preload {
+	position: absolute;
+	left: -999px;
+	top: 0;
+}
+
+.loading h2 {
+	display: block;
+}
+
+h2, .loading > p, .loading > div {
+	display: none;
+}
