@@ -8,6 +8,6 @@
 	display: block;
 }
 
-h2, .loading > p, .loading > div {
+h2, .loading > div {
 	display: none;
 }

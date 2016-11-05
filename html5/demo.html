@@ -2,17 +2,16 @@
 <html>
 <head>
 <title>Moir&eacute; Plasma Effect</title>
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Orbitron:700">
 <link rel="stylesheet" type="text/css" href="plasma.css">
 <link rel="stylesheet" type="text/css" href="scroller.css">
 <link rel="stylesheet" type="text/css" href="preloader.css">
 </head>
 <body class="loading">
 <h1>Moir&eacute; Plasma Effect</h1>
-<h2>Loading...</h2>
 <p>Best viewed on a modern desktop browser, zoom 100%.</p>
 <p>Getting dizzy? Read
 <a href="https://github.com/helderman/moire-plasma-effect/blob/master/html5/demo.html">the plain-text version</a>.</p>
+<h2>Loading...</h2>
 <div>
 ~ ~ ~ ~ ~ ~
 Moir&eacute; Plasma Effect
@@ -21,7 +20,8 @@ by Ruud Helderman
 ~ ~ ~ ~ ~ ~
 Welcome to this demonstration of the Moir&eacute; Plasma Effect.
 The background animation on this page is pure CSS;
-there is NO JavaScript involved.
+there is <i>no</i> JavaScript involved
+(except for the logic to preload the font and images).
 ~ ~ ~ ~ ~ ~
 Looks great on all web browsers with cutting-edge CSS support.
 Tested on the latest versions of
@@ -39,7 +39,7 @@ a third layer of red and green lines in the background.
 This animation started out as a Scratch project in 2015.
 I wanted to produce an old-school plasma effect,
 but the Scratch player was too slow for brute-force pixel manipulation.
-My approach wasn't very scientific;
+My approach wasn't very scientific, but effective nevertheless;
 I just started experimenting with GIMP and Scratch
 until I finally got something I liked.
 I was surprised to find you could even use multiple colors;
@@ -52,12 +52,14 @@ Considering my age, you might assume I was involved,
 but to be honest, I wasn't.
 Still, I wanted to keep this demo in style, hence this simple scroller.
 So here come the obligatory greetings..........
-Thanks for your attention, be good, play nice, don't drink and drive,
-blah blah, and so loooooooong.
+Thanks for your attention, love you all, be good, play nice,
+don't drink and drive, and so loooooooong.
 ~ ~ ~ ~ ~ ~
 </div>
 <img class="preload" alt="moire1.png" src="" />
 <img class="preload" alt="moire2.png" src="" />
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
 <script type="text/javascript" src="preloader.js"></script>
+<script type="text/javascript" src="demo.js"></script>
 </body>
 </html>
