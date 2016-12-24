@@ -35,8 +35,8 @@ Preloader.prototype.done = function() {
 };
 
 Preloader.prototype.get_next_event_handler = function() {
-	this.loading |= this.mask;
-	return Preloader.create_event_handler(this, this.mask <<= 1);
+	this.loading |= this.mask <<= 1;
+	return Preloader.create_event_handler(this, this.mask);
 };
 
 Preloader.create_event_handler = function(state, mask) {
