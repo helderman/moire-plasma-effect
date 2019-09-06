@@ -8,7 +8,7 @@
 </head>
 <body class="loading">
 <h1>Moir&eacute; Plasma Effect</h1>
-<p>Best viewed on a modern desktop browser, zoom 100%.</p>
+<p>Best viewed on a modern desktop browser.</p>
 <p>Getting dizzy? Read
 <a href="https://github.com/helderman/moire-plasma-effect/blob/master/html5/demo.html">the plain-text version</a>.</p>
 <h2>Loading...</h2>
@@ -21,14 +21,14 @@ by Ruud Helderman
 Welcome to this demonstration of the Moir&eacute; Plasma Effect.
 The background animation on this page is pure CSS;
 there is <i>no</i> JavaScript involved
-(except for the logic to preload the font and images).
+(except for the logic to preload the font and images,
+and calculate the correct image size).
 ~ ~ ~ ~ ~ ~
 Looks great on all web browsers with cutting-edge CSS support.
 Tested on the latest versions of
 Google Chrome, Firefox, Internet Explorer and Edge.
 I did notice a slight flicker on some displays; not sure why.
-Make sure zoom is 100% or the effect will be ruined.
-This may well rule out mobile devices; sorry.
+On IE and Edge, make sure zoom is 100% or the effect will be ruined.
 ~ ~ ~ ~ ~ ~
 The idea behind the effect is simple:
 take two layers of slightly wavy parallel black lines,
@@ -59,6 +59,7 @@ don't drink and drive, and so loooooooong.
 <img class="preload" alt="moire1.png" src="" />
 <img class="preload" alt="moire2.png" src="" />
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+<script type="text/javascript" src="scaler.js"></script>
 <script type="text/javascript" src="preloader.js"></script>
 <script type="text/javascript" src="demo.js"></script>
 </body>

@@ -1,9 +1,20 @@
 .plasma {
-	background: url(moire1.png), url(moire2.png);
-	animation: sliding 8s steps(512) infinite;
+	--bg-size: 512px;
+	--steps: 512;
+
+	background-size: 512px;					/* IE */
+	background-size: var(--bg-size);
+	background-image: url(moire1.png), url(moire2.png);
+	animation: sliding_IE 8s steps(512) infinite;		/* IE */
+	animation: sliding 8s steps(var(--steps)) infinite;
+}
+
+@keyframes sliding_IE {
+	from { background-position: 512px 512px, 0 512px; }
+	to   { background-position: 0 0, 512px 0; }
 }
 
 @keyframes sliding {
-	from { background-position: 512px 512px, 0 512px; }
-	to   { background-position: 0 0, 512px 0; }
+	from { background-position: var(--bg-size) var(--bg-size), 0 var(--bg-size); }
+	to   { background-position: 0 0, var(--bg-size) 0; }
 }
