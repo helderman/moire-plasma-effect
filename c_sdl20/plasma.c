@@ -9,7 +9,6 @@
 
 #define SCRN_WIDTH	640
 #define SCRN_HEIGHT	480
-#define SCRN_DEPTH	24
 
 extern char _binary____html5_moire1_png_start;
 extern char _binary____html5_moire1_png_size;
@@ -46,35 +45,37 @@ static void clip_bottom(SDL_Rect *rect1, SDL_Rect *rect2, int d)
 	if (d < 0) { ADJUST_BOTTOM(rect1, d); ADJUST_BOTTOM(rect2, d); }
 }
 
-static void blit_tiles(SDL_Surface *screen, SDL_Surface *tile, int xpos, int ypos)
+static void blit_tiles(SDL_Renderer *renderer, SDL_Texture *tile, int xpos, int ypos)
 {
+	int tile_w = 512;
+	int tile_h = 512;
 	int x, y;
-	for (y = -ypos; y < screen->h; y += tile->h)
+	for (y = -ypos; y < SCRN_HEIGHT; y += tile_h)
 	{
-		for (x = -xpos; x < screen->w; x += tile->w)
+		for (x = -xpos; x < SCRN_WIDTH; x += tile_w)
 		{
-			SDL_Rect src = {0, 0, tile->w, tile->h};
-			SDL_Rect dest = {x, y, tile->w, tile->h};
+			SDL_Rect src = {0, 0, tile_w, tile_h};
+			SDL_Rect dest = {x, y, tile_w, tile_h};
 			clip_left(&src, &dest, x);
-			clip_right(&src, &dest, screen->w - dest.x - dest.w);
+			clip_right(&src, &dest, SCRN_WIDTH - dest.x - dest.w);
 			clip_top(&src, &dest, y);
-			clip_bottom(&src, &dest, screen->h - dest.y - dest.h);
-			SDL_BlitSurface(tile, &src, screen, &dest);
+			clip_bottom(&src, &dest, SCRN_HEIGHT - dest.y - dest.h);
+			SDL_RenderCopy(renderer, tile, &src, &dest);
 		}
 	}
 }
 
-static void blit_all(SDL_Surface *screen, SDL_Surface *front, SDL_Surface *back, int position)
+static void blit_all(SDL_Renderer *renderer, SDL_Texture *front, SDL_Texture *back, int position)
 {
 	int pos1 = position & 511;
 	int pos2 = ~position & 511;
-	blit_tiles(screen, back, pos2, pos1);
-	blit_tiles(screen, front, pos1, pos1);
+	blit_tiles(renderer, back, pos2, pos1);
+	blit_tiles(renderer, front, pos1, pos1);
 }
 
 int main(int argc, char *argv[])
 {
-	int i, done = 0, flip = 0;
+	int i, done = 0;
 
 	SDL_Init(SDL_INIT_VIDEO);
 	atexit(SDL_Quit);
@@ -85,31 +86,22 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	Uint32 flags = SDL_HWSURFACE;
+	Uint32 flags = 0;
 	for (i = 1; i < argc; i++)
 	{
 		if (strcmp(argv[i], "-fullscreen") == 0)
 		{
-			flags |= SDL_FULLSCREEN;
+			flags |= SDL_WINDOW_FULLSCREEN;
 			SDL_ShowCursor(SDL_DISABLE);
 		}
-		if (strcmp(argv[i], "-doublebuf") == 0)
-		{
-			flags |= SDL_DOUBLEBUF;
-		}
-		if (strcmp(argv[i], "-flip") == 0)
-		{
-			flip = 1;
-		}
 	}
-	SDL_Surface *screen = SDL_SetVideoMode(SCRN_WIDTH, SCRN_HEIGHT, SCRN_DEPTH, flags);
-	if (screen == NULL)
+	SDL_Window *window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCRN_WIDTH, SCRN_HEIGHT, flags);
+	if (window == NULL)
 	{
 		fprintf(stderr, "Failed to set video mode.\n");
 		exit(1);
 	}
-
-	SDL_WM_SetCaption(TITLE, *argv);
+	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 
 	SDL_RWops *rw1 = SDL_RWFromMem(moire1_start, moire1_size);
 	SDL_RWops *rw2 = SDL_RWFromMem(moire2_start, moire2_size);
@@ -117,8 +109,8 @@ int main(int argc, char *argv[])
 	SDL_Surface *surface1 = IMG_LoadTyped_RW(rw1, 1, "png");
 	SDL_Surface *surface2 = IMG_LoadTyped_RW(rw2, 1, "png");
 
-	SDL_SetAlpha(surface1, SDL_RLEACCEL | SDL_SRCALPHA, 0);
-	SDL_SetAlpha(surface2, SDL_RLEACCEL, 0);
+	SDL_Texture *texture1 = SDL_CreateTextureFromSurface(renderer, surface1);
+	SDL_Texture *texture2 = SDL_CreateTextureFromSurface(renderer, surface2);
 
 	while (!done)
 	{
@@ -138,13 +130,9 @@ int main(int argc, char *argv[])
 		else
 		{
 			int ms = SDL_GetTicks();
-			blit_all(screen, surface1, surface2, SPEED * ms / 1000);
+			blit_all(renderer, texture1, texture2, SPEED * ms / 1000);
 
-			SDL_UpdateRect(screen, 0, 0, 0, 0);
-			if (flip)
-			{
-				SDL_Flip(screen);
-			}
+			SDL_RenderPresent(renderer);
 			SDL_Delay(10);
 		}
 	}

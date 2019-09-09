@@ -28,4 +28,4 @@ You can watch the animation here:
 ## C version
 
 You can find the source code
-[here](https://github.com/helderman/moire-plasma-effect/tree/master/c).
+[here](https://github.com/helderman/moire-plasma-effect/tree/master/c_sdl20).
