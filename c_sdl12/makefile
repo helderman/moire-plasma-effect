@@ -1,7 +1,16 @@
-CFLAGS = -I/usr/include/SDL -Wall -Wextra
+# Prerequisites (Ubuntu):
+# sudo apt-get install gcc libsdl1.2-dev libsdl-image1.2-dev
 
-demo: plasma.o moire1.o moire2.o
-	$(CC) $^ -lSDL -lSDL_image -o $@
+TARGET = demo
+OBJS = plasma.o moire1.o moire2.o
+CFLAGS = -I/usr/include/SDL -Wall -Wextra -pedantic
+LDLIBS = -lSDL -lSDL_image
+
+$(TARGET): $(OBJS)
+	$(CC) $^ $(LDLIBS) -o $@
 
 %.o: ../html5/%.png
-	objcopy --input binary --output elf32-i386 --binary-architecture i386 $< $@
+	ld -r -b binary -o $@ $<
+
+clean:
+	$(RM) $(TARGET) $(OBJS)
