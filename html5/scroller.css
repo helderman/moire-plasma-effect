@@ -17,8 +17,12 @@
 
 .scroller > div {
 	position: absolute;
-	top: 50%;
 	margin-left: 120%;
+	animation: wave 2s ease-in-out infinite alternate, skew 2s ease-in-out 0.5s infinite alternate;
+}
+
+.scroller > div > div {
+	position: absolute;
 	white-space: nowrap;
 	font-size: 60px;
 	font-weight: bold;
@@ -26,9 +30,19 @@
 	animation: scrolling 180s linear infinite, colors 8s linear infinite;
 }
 
+@keyframes wave {
+	from { top: 45%; }
+	to   { top: 55%; }
+}
+
+@keyframes skew {
+	from { transform: skewY(-1.5deg); }
+	to   { transform: skewY(1.5deg); }
+}
+
 @keyframes scrolling {
 	from { left: 0; }
-	to   { left: -60000px; }
+	to   { left: -64000px; }
 }
 
 @keyframes colors {
